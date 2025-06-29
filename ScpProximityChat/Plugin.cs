@@ -12,8 +12,8 @@ namespace ScpProximityChat
     {
         public override string Name { get; } = "ScpProximityChat";
         public override string Author { get; } = "Bolton";
-        public override Version Version { get; } = new(1, 0, 2);
-        public override Version RequiredExiledVersion { get; } = new(9, 0, 0);
+        public override Version Version { get; } = new(1, 0, 3);
+        public override Version RequiredExiledVersion { get; } = new(9, 6, 1);
 
         private EventHandlers _eventHandlers;
 
@@ -29,7 +29,6 @@ namespace ScpProximityChat
                 HeaderSetting header = new HeaderSetting(Config.SettingHeaderLabel);
                 IEnumerable<SettingBase> settingBases = new SettingBase[]
                 {
-                    header,
                     new KeybindSetting(Config.KeybindId, Config.KeybindLabel, default, hintDescription: Config.KeybindHint),
                 };
 

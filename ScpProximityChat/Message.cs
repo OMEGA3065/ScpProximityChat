@@ -1,5 +1,5 @@
 using System.ComponentModel;
-using ScpProximityChat.Enums;
+using Exiled.API.Enums;
 
 namespace ScpProximityChat
 {

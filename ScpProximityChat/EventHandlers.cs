@@ -70,6 +70,20 @@ namespace ScpProximityChat
         {
             Player player = ev.Player;
 
+            VcMuteFlags flags = VoiceChatMutes.GetFlags(player.ReferenceHub);
+            if (flags != VcMuteFlags.None)
+            {
+                VcMuteFlags[] values = EnumUtils<VcMuteFlags>.Values;
+                foreach (VcMuteFlags vcMuteFlags in values)
+                {
+                    if (vcMuteFlags == VcMuteFlags.LocalRegular || vcMuteFlags == VcMuteFlags.GlobalRegular)
+                    {
+                        ev.IsAllowed = false;
+                        return;
+                    }
+                }
+            }
+
             if (ev.VoiceMessage.Channel != VoiceChatChannel.ScpChat)
                 return;
 
@@ -175,7 +189,7 @@ namespace ScpProximityChat
                         break;
                 }
             }
-            else
+            else if (!player.IsMuted && !player.IsGlobalMuted)
             {
                 SpeakerToy speaker = Object.Instantiate(PrefabHelper.GetPrefab<SpeakerToy>(PrefabType.SpeakerToy), player.Transform, true);
                 NetworkServer.Spawn(speaker.gameObject);
